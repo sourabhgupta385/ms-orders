@@ -22,6 +22,11 @@ node {
         }
    }
 
+   stage("Package Application"){
+        sh 'mvn package'
+        //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'coverage', reportFiles: 'index.html', reportName: 'Coverage Report', reportTitles: ''])
+   }
+
 
    stage("Dev - Building Application"){
         openshiftBuild(buildConfig: 'orders',showBuildLogs: 'true')
