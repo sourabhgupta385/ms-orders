@@ -21,10 +21,7 @@ node {
            sh "sonar-scanner"
         }
    }
-   
-   
 
-   
 
    stage("Dev - Building Application"){
         openshiftBuild(buildConfig: 'orders',showBuildLogs: 'true')
