@@ -23,7 +23,7 @@ node {
    }
 
    stage("Package Application"){
-        sh 'mvn package'
+        sh 'mvn -DskipTests package'
         //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'coverage', reportFiles: 'index.html', reportName: 'Coverage Report', reportTitles: ''])
    }
 
