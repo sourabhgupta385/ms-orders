@@ -9,6 +9,11 @@ node {
    stage("Checkout Source"){
        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/akilans/ms-orders.git']]])
    }
+
+   stage("Unit Test & Coverage"){
+        sh 'mvn test'
+        //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'coverage', reportFiles: 'index.html', reportName: 'Coverage Report', reportTitles: ''])
+   }
    
    
    stage("Code Quality - SonarQube"){
@@ -18,10 +23,7 @@ node {
    }
    
    
-   stage("Unit Test"){
-        sh 'mvn test'
-        //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'coverage', reportFiles: 'index.html', reportName: 'Coverage Report', reportTitles: ''])
-   }
+
    
 
    stage("Dev - Building Application"){
