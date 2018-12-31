@@ -29,7 +29,8 @@ node {
 
 
    stage("Dev - Building Application"){
-        openshiftBuild(buildConfig: 'orders',showBuildLogs: 'true')
+         sh 'oc start-build orders --from-dir . --follow'
+        //openshiftBuild(buildConfig: 'orders',showBuildLogs: 'true')
    }
 
    stage("Dev - Deploying Application"){
