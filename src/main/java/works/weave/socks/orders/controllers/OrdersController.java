@@ -81,14 +81,14 @@ public class OrdersController {
                     cardFuture.get(timeout, TimeUnit.SECONDS).getContent(),
                     customerFuture.get(timeout, TimeUnit.SECONDS).getContent(),
                     amount);
-            LOG.info("Sending payment request: " + paymentRequest);
+            LOG.info("Sending payment request - ADMCOE: " + paymentRequest);
             Future<PaymentResponse> paymentFuture = asyncGetService.postResource(
                     config.getPaymentUri(),
                     paymentRequest,
                     new ParameterizedTypeReference<PaymentResponse>() {
                     });
             PaymentResponse paymentResponse = paymentFuture.get(timeout, TimeUnit.SECONDS);
-            LOG.info("Received payment response: " + paymentResponse);
+            LOG.info("Received payment response - ADMCOE : " + paymentResponse);
             if (paymentResponse == null) {
                 throw new PaymentDeclinedException("Unable to parse authorisation packet");
             }
@@ -112,10 +112,10 @@ public class OrdersController {
                     shipmentFuture.get(timeout, TimeUnit.SECONDS),
                     Calendar.getInstance().getTime(),
                     amount);
-            LOG.debug("Received data: " + order.toString());
+            LOG.debug("Received data - ADMCOE: " + order.toString());
 
             CustomerOrder savedOrder = customerOrderRepository.save(order);
-            LOG.debug("Saved order: " + savedOrder);
+            LOG.debug("Saved order - ADMCOE: " + savedOrder);
 
             return savedOrder;
         } catch (TimeoutException e) {
