@@ -17,7 +17,7 @@ describe("Testing Orders API", () => {  // <= Pass in done callback
                 expect(res).to.have.status(200);
                 done();                               // <= Call done to signal callback end
             });
-    })
+    }).timeout(5000)
 
     it('GET / should return JSON data', (done) => {   // <= No done callback
         chai.request(url)
@@ -27,6 +27,6 @@ describe("Testing Orders API", () => {  // <= Pass in done callback
                 //expect(res).to.have.status(403);
                 done();
             });
-    });
+    }).timeout(5000);
 
 })
