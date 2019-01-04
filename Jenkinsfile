@@ -2,9 +2,12 @@ node {
    def SONAR_SCANNER = tool "SONARQUBE_SCANNER"
    def MAVEN_HOME = tool "MAVEN_HOME"
    def JAVA_HOME = tool "JAVA_HOME"
+   def NODEJS_HOME = tool "NODE_PATH"
+   
 
-   env.PATH="${env.PATH}:${SONAR_SCANNER}/bin:${MAVEN_HOME}/bin:${JAVA_HOME}/bin"
+   env.PATH="${env.PATH}:${SONAR_SCANNER}/bin:${MAVEN_HOME}/bin:${JAVA_HOME}/bin::${NODEJS_HOME}/bin"
    sh 'mvn --version'
+   sh 'npm --version'
    
    stage("Checkout Source"){
        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/akilans/ms-orders.git']]])
