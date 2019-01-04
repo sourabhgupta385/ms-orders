@@ -45,9 +45,12 @@ node {
       openshiftTag(srcStream: 'orders', srcTag: 'latest', destStream: 'orders', destTag: 'prod')
    }
    
-   /*
+   stage("Install Dependencies"){
+        sh 'npm install'
+   }
+   
    stage("Functional Testing"){
-        sh 'python functionalTest.py'   
+        sh 'npm run test'   
    }
    
       
@@ -55,7 +58,7 @@ node {
          sh 'artillery run perfTest.yml'
          //sh 'artillery run perfTest.yml --output load-test.json && artillery report load-test.json --output load-test-result.html'
    }
-   */
+   
  
    /*
    stage("Publish Report"){
@@ -68,9 +71,7 @@ node {
    }
    */
    
-   
-          
-   
+
    stage('Deploy to Production approval'){
       input "Deploy to prod?"
    }
