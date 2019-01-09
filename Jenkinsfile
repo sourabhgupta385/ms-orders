@@ -8,6 +8,7 @@ node {
    env.PATH="${env.PATH}:${SONAR_SCANNER}/bin:${MAVEN_HOME}/bin:${JAVA_HOME}/bin::${NODEJS_HOME}/bin"
    sh 'mvn --version'
    sh 'npm --version'
+   sh 'set'
    
    stage("Checkout Source"){
        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/sourabhgupta385/ms-orders.git']]])
@@ -21,6 +22,7 @@ node {
    
    stage("Code Quality - SonarQube"){
        withSonarQubeEnv {
+          sh 'mvn --version'
            sh "sonar-scanner"
         }
    }
