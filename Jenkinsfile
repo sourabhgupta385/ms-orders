@@ -22,6 +22,7 @@ node {
    
    stage("Code Quality - SonarQube"){
        withSonarQubeEnv {
+          sh "echo ${SONAR_HOST_URL}"
           sh 'mvn --version'
            sh "sonar-scanner"
         }
